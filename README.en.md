@@ -3,6 +3,22 @@
 #### Description
 企业OA系统全栈项目，前端react,后端nodejs,egg
 
+# umi Enterprise-OA project
+
+## Getting Started
+
+Install dependencies,
+
+```bash
+$ yarn
+```
+
+Start the dev server,
+
+```bash
+$ yarn start
+```
+
 #### Software Architecture
 Software architecture description
 
