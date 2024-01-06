@@ -2,7 +2,7 @@ import { qs } from 'qs'; //处理请求的参数
 import { message } from 'antd';
 import { history } from 'umi';
 
-const fetech = require('dva').fetch;
+const fetch = require('dva').fetch;
 
 //创建响应状态处理函数
 const checkStatus = (res) => {
@@ -45,7 +45,7 @@ class Http {
     const defaultOptions = {
       mode: 'cors', //支持跨域处理，以cors的形式进行跨域
       headers: {
-        Authorization: sessionStorage.get('token') || null,
+        Authorization: sessionStorage.getItem('token') || null,
       },
     };
 
@@ -55,7 +55,7 @@ class Http {
 
     // 合并options选项
     const newOptions = { ...defaultOptions, ...options };
-    return fetech(url, newOptions)
+    return fetch(url, newOptions)
       .then(checkStatus)
       .then(judgeOkState)
       .then((res) => {
@@ -68,8 +68,8 @@ class Http {
   }
 
   // post请求处理
-  post(url, params = {}, options = {}) {
-    const options = Object.assign({ method: 'POST' }, options);
+  post(url, params = {}, option = {}) {
+    const options = Object.assign({ method: 'POST' }, option);
     options.body = JSON.stringify(params);
     return Http.staticFetch(url, options);
   }

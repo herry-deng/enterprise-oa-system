@@ -7,6 +7,7 @@ export default defineConfig({
   },
   dva: { immer: true },
   alias: {
+    api: resolve(__dirname, './src/servicer/'),
     utils: resolve(__dirname, './src/utils'),
     components: resolve(__dirname, './src/components'),
     common: resolve(__dirname, './src/common'),
@@ -16,7 +17,7 @@ export default defineConfig({
   // ],
   fastRefresh: {},
   proxy: {
-    api: {
+    '/api': {
       target: 'http://127.0.0.1:7001',
       changeOrigin: true,
     },
