@@ -3,14 +3,19 @@ import React, { useState } from 'react';
 import IconMap from 'components/IconMap';
 import { Button } from 'antd';
 import { loginRule } from 'utils/rules';
+import $http from 'api';
 
 const SmCodeLogin = ({ FormItem, Input, form }) => {
   const [disabled, setDisabled] = useState(true);
   const [currentStatus, setCurrentStatus] = useState(true);
   let [currentTime, setCurrentTime] = useState(60);
 
-  const _sendSmcode = () => {
+  const _sendSmcode = async () => {
     setCurrentStatus(false);
+    //获取当前用户手机号码
+    const mobile = form.getFieldValue('mobile');
+    const res = await $http.getSmCode({ mobile });
+    // console.log(mobile);
     setDisabled(true);
     runTime();
   };

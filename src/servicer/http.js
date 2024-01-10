@@ -1,4 +1,5 @@
-import { qs } from 'qs'; //处理请求的参数
+// import { qs } from 'qs'; //处理请求的参数
+import qs from 'qs';
 import { message } from 'antd';
 import { history } from 'umi';
 
