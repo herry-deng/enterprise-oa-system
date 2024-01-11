@@ -3,11 +3,12 @@ import AccountLogin from './component/AccountLogin';
 import SmCodeLogin from './component/SmCodeLogin';
 //- 使用antd的form表单相关组件
 import { Form, Input, Button, Row, Col } from 'antd';
-const FormItem = Form.Item;
 import IconMap from 'components/IconMap';
 import logoImg from 'common/img/logo.svg';
 import './css/login.less';
 import { useDispatch, useSelector } from 'umi';
+
+const FormItem = Form.Item;
 
 const login = ({ history }) => {
   const [type, setType] = useState(0);

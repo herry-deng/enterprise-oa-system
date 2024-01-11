@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React, { useState } from 'react';
 import IconMap from 'components/IconMap';
-import { Button } from 'antd';
+import { Button, message } from 'antd';
 import { loginRule } from 'utils/rules';
 import $http from 'api';
 
@@ -15,7 +15,7 @@ const SmCodeLogin = ({ FormItem, Input, form }) => {
     //获取当前用户手机号码
     const mobile = form.getFieldValue('mobile');
     const res = await $http.getSmCode({ mobile });
-    // console.log(mobile);
+    message.success(res.msg);
     setDisabled(true);
     runTime();
   };
