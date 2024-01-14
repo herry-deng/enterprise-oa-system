@@ -15,20 +15,36 @@ const FormItem = Form.Item;
 
 const forgetPassword = ({ history }) => {
   const [currentStep, setCurrentStep] = useState(1);
-  const loading = useSelector((state) => state.loading);
+  // const loading = useSelector((state) => state.loading);
 
   // 当前用户提交按钮点击处理
   const submitSelect = async (data) => {
     currentStep === 1
       ? _checkCode(data.code)
-      : _updatePassword(data.newPassword);
+      : _updatePassword(data.confirmPassword);
   };
 
   //检测用户验证码操作
-  const _checkCode = async (smCode) => {};
+  const _checkCode = async (smCode) => {
+    const { data, msg } = await $http.checkedCode({ smCode });
+    if (data) {
+      setCurrentStep(2);
+    } else {
+      message.error(msg);
+    }
+  };
 
   //用户修改密码
-  const _updatePassword = async (newPassword) => {};
+  const _updatePassword = async (newPassword) => {
+    // console.log(newPassword);
+    const { data, msg } = await $http.resetPassword({ newPassword });
+    if (data) {
+      message.success(msg);
+      history.replace('/users/login');
+    } else {
+      message.error(msg);
+    }
+  };
 
   //- 组件选择的容器函数
   const ComponentSelector = (props) =>
@@ -48,12 +64,7 @@ const forgetPassword = ({ history }) => {
         {/* 选择当前展示的组件 用户名  手机号 */}
         {ComponentSelector({ FormItem, Input, form })}
         <Row>
-          <Button
-            block={true}
-            type="primary"
-            htmlType="submit"
-            loading={loading.effects['user/login']}
-          >
+          <Button block={true} type="primary" htmlType="submit">
             {currentStep === 1 ? '下一步' : '重置'}
           </Button>
         </Row>

@@ -29,4 +29,21 @@ export const loginRule = {
     { max: 6, message: '验证码长度不正确' },
     { min: 6, message: '验证码长度不正确' },
   ],
+  confirmPasswordRule(form) {
+    return [
+      {
+        validator: (rule, val) => {
+          // console.log(val);
+          switch (true) {
+            case !Boolean(val):
+              return Promise.reject('确认密码不能为空');
+            case form.getFieldValue('password') !== val:
+              return Promise.reject('两次输入的密码不相同');
+            default:
+              return Promise.resolve();
+          }
+        },
+      },
+    ];
+  },
 };
