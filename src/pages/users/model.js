@@ -1,5 +1,6 @@
 import $http from 'api';
 import { message } from 'antd';
+import { history } from 'umi';
 
 export default {
   namespace: 'user',
@@ -30,7 +31,7 @@ export default {
       });
       //todo 开始进行界面跳转
       // console.log(data, msg, '-----');
-      // history.push(routeData.data[0].route);
+      history.push(routeData.data[0].route);
     },
   },
 };
