@@ -3,7 +3,7 @@ import logo from 'common/img/logo1.png';
 import { history, Link } from 'umi';
 import IconMap from 'components/IconMap';
 
-const SideBar = ({ Sider, Menu }) => {
+const SideBar = ({ Sider, Menu, collapse }) => {
   const pathname = history.location.pathname;
   console.log(pathname);
   const routeList = sessionStorage.getItem('routeList')
@@ -11,11 +11,11 @@ const SideBar = ({ Sider, Menu }) => {
     : [];
   // console.log(routeList,"9999");
   return (
-    <Sider theme="light" className="side-bar">
+    <Sider theme="light" className="side-bar" collapsed={collapse}>
       <div className="brand">
         <div className="logo">
           <img src={logo} alt="" />
-          <h1>大河集团</h1>
+          {!collapse && <h1>大河集团</h1>}
         </div>
       </div>
       <div className="menu-container">
