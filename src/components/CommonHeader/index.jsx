@@ -8,13 +8,21 @@ const { SubMenu, Divider, Item } = Menu;
 
 const CommonHeader = ({ Header, collapse, changeCollapse }) => {
   const { userInfo } = useSelector((state) => state.user);
-  console.log(userInfo);
+  // console.log(userInfo,"oooooo");
   const MenuTitle = (
     <>
       <span>{userInfo.userName}</span>
-      <Avatar style={{ marginLeft: 0 }} src={defaultAvatarIcon} />
+      <Avatar
+        style={{ marginLeft: 0 }}
+        src={userInfo.avatar || defaultAvatarIcon}
+      />
     </>
   );
+
+  const signOut = () => {
+    sessionStorage.clear();
+    window.location.href = '/users/login';
+  };
   return (
     <Header className="header-wrapper">
       <div className="button" onClick={changeCollapse}>
@@ -23,7 +31,7 @@ const CommonHeader = ({ Header, collapse, changeCollapse }) => {
       <Menu mode="horizontal">
         <SubMenu key={['1']} title={MenuTitle}>
           <Divider />
-          <Item key="4" icon={IconMap.signOut}>
+          <Item key="4" icon={IconMap.signOut} onClick={signOut}>
             <span>退出</span>
           </Item>
         </SubMenu>

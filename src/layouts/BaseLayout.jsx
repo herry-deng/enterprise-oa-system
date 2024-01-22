@@ -4,9 +4,23 @@ const { Header, Sider, Content } = Layout;
 import './BaseLayout.less';
 import SideBar from '../components/SideBar';
 import CommonHeader from '../components/CommonHeader';
+import { history } from 'umi';
+import NotFoundPage from '../pages/404Page';
 
 const BaseLayout = ({ children }) => {
   const [collapse, setCollapse] = useState(false);
+
+  const { location } = history;
+  const routeList = JSON.parse(sessionStorage.getItem('routeList'));
+  console.log(routeList);
+
+  const isIncludesPage = () => {
+    if (location.pathname === '/') {
+      history.replace(routeList[0].route);
+      return false;
+    }
+    return routeList.some((item) => item.route === location.pathname);
+  };
 
   const changeCollapse = () => setCollapse(!collapse);
   // const changeCollapse = status => {
@@ -22,7 +36,7 @@ const BaseLayout = ({ children }) => {
           changeCollapse={changeCollapse}
         ></CommonHeader>
 
-        <Content>{children}</Content>
+        <Content>{isIncludesPage() ? children : <NotFoundPage />}</Content>
       </Layout>
     </Layout>
   );
