@@ -6,6 +6,9 @@ export default defineConfig({
     type: 'none',
   },
   dva: { immer: true },
+  dynamicImport: {
+    loading: '@/components/Loading',
+  },
   alias: {
     api: resolve(__dirname, './src/servicer/'),
     utils: resolve(__dirname, './src/utils'),
